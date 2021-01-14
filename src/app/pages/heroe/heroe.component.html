@@ -1,0 +1,80 @@
+<h1>Heroe <small>nombre del heroe</small> </h1>
+<hr>
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/heroes" 
+                class="btn btn-danger">
+            <i class="fa fa-arrow-left"></i>
+            Regresar
+        </button>
+    </div>
+</div>
+
+<div class="row mt-3 animated fadeIn fast">
+    <div class="col">
+        <form (ngSubmit)="guardar( f ) " #f="ngForm">
+            <div class="form-group">
+                <label for="">Firebase ID</label>
+                <input  disabled="disabled"
+                        placeholder="Firebase ID"
+                        class="form-control"
+                        type="text"
+                        name="id"
+                        [(ngModel)]="heroe.id">
+                <small id="emailHelp" class="form-text">Este campo es auto generado</small>
+            </div>
+            <div class="form-group">
+                <label for="">Nombre</label>
+                <input  name="nombre"
+                        placeholder="Nombre"
+                        class="form-control"
+                        type="text"
+                        required
+                        [(ngModel)]="heroe.nombre"
+                        [class.is-invalid]="nombre.invalid && nombre.touched"
+                        #nombre="ngModel">
+                <small *ngIf="nombre.invalid && nombre.touched" class="form-text text-danger">El campo es requerido</small>
+            </div>
+            <div class="form-group">
+                <label for="">Poder</label>
+                <input  name="poder"
+                        placeholder="Poder del heroe"
+                        class="form-control"
+                        type="text"
+                        required
+                        [(ngModel)]="heroe.poder"
+                        [class.is-invalid]="poder.invalid && poder.touched"
+                        #poder="ngModel">
+                <small *ngIf="poder.invalid && poder.touched" class="form-text text-danger">El campo es requerido</small>
+            </div>
+            <div class="form-group">
+                <label for="">Estado</label>
+                <br/>
+                <button (click)="heroe.vivo = false"
+                        *ngIf="heroe.vivo===true" 
+                        class="btn btn-outline-success w-50" 
+                        type="button">
+                    <i class="fa fa-smile-wink"></i>
+                    Vivo
+                </button>
+
+                <button (click)="heroe.vivo=true"
+                        *ngIf="heroe.vivo===false" 
+                        class="btn btn-outline-danger w-50" 
+                        type="button">
+                    <i class="fa fa-dizzy"></i>
+                    Muerto
+                </button>
+            </div>
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit"
+                        class="btn btn-primary w-25">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<h1>Listados de super heroes</h1>
+<hr>
+
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/heroe/nuevo"
+                class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Agregar
+        </button>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+        <table  *ngIf="!cargando && heroes.length >0 "
+                class="table animated fadeIn fast">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Poder</th>
+                <th scope="col">Vivo</th>
+                <th scope="col">Tools</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let heroe of heroes; let i = index ">
+                <th scope="row">{{ i +1 }}</th>
+                <th scope="row">{{ heroe.nombre }}</th>
+                <th scope="row">{{ heroe.poder }}</th>
+                <th scope="row">
+                    <label class="badge badge-primary" *ngIf="heroe.vivo">Vivo</label>
+                    <label class="badge badge-danger" *ngIf="!heroe.vivo">Muerto</label>
+                </th>
+                <th>
+                    <button class="btn btn-info mr-1" (click)="editarHeroe( heroe.id )" >
+                        <i class="fa fa-pencil-alt"></i>
+                    </button>
+                    <button class="btn btn-danger" (click)="eliminarHeroe( heroe.id, i )" >
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+                </th>
+            </tr>
+             
+            </tbody>
+          </table>
+    </div>
+</div>
+
+<div *ngIf="heroes.length === 0 && !cargando" 
+    class="alert alert-warning text-center mt-3 animated fadeIn fast">
+    <h4 class="alert-heading">No hay registro</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>
+
+<div *ngIf="cargando" 
+    class="alert alert-info text-center mt-3 animated fadeIn fast">
+    <h4 class="alert-heading">Cargando...</h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>
