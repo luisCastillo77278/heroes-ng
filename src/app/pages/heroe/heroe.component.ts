@@ -38,8 +38,12 @@ export class HeroeComponent implements OnInit {
   }
 
   guardar( f: NgForm ){
-    if ( f.invalid ){ return; }
-    //console.log(this.heroe);
+    if ( f.invalid ){ 
+      Object.values(f.controls).forEach( control => {
+        control.markAsTouched();
+      });
+      return;
+    }
 
     Swal.fire({
       title: '',
